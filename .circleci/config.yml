@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "a9:72:e1:3b:ce:b8:eb:fc:5c:9c:f1:9a:89:29:f5:9f"
+      - run:
+          name: Run deploy script
+          command: bash ~/project/scripts/deploy.sh
+
+workflows:
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
