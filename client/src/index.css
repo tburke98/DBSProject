@@ -12,3 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.table-buttons {
+  @apply flex-1 bg-[#34332f] text-[#a4b16c] text-center rounded text-4xl py-4;
+}
