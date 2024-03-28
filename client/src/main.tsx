@@ -37,13 +37,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 function Layout() {
   return (
     <>
-      <div className="bg-blue-800 text-white p-4 w-full flex gap-4">
-        <Link to="/">Home</Link>
-        <Link to="/test">Test</Link>
-        <Link to="/expenses">Expenses</Link>
+      <div className="flex flex-col w-full h-screen">
+        <div className="bg-blue-800 text-white p-4 w-full flex gap-4">
+          <Link to="/">Home</Link>
+          <Link to="/test">Test</Link>
+          <Link to="/expenses">Expenses</Link>
+        </div>
+        <Outlet />
+        <div className="bg-blue-800 text-white p-2 w-full text-center">&copy; CSCI 3461 Database Systems Group 5</div>
       </div>
-      <Outlet />
-      <div className="bg-blue-800 text-white p-2 w-full text-center">&copy; CSCI 3461 Database Systems Group 5</div>
     </>
   )
 }
