@@ -14,5 +14,9 @@
 }
 
 .table-buttons {
-  @apply flex-1 bg-[#34332f] text-[#a4b16c] text-center rounded text-4xl py-4;
+  @apply flex-1 bg-[#34332f] text-indigo-100 text-center rounded text-2xl py-4 flex flex-col;
+}
+
+.table-icons {
+  @apply m-auto text-blue-300;
 }
