@@ -49,9 +49,9 @@ function Layout() {
 }
 
 function Home() {
-  return <div>Hello, Home!</div>
+  return <div className="flex flex-1">Hello, Home!</div>
 }
 
 function Test() {
-  return <div>Hello, Test!</div>
+  return <div className="flex flex-1">Hello, Test!</div>
 }
