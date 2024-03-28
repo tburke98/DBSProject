@@ -51,7 +51,22 @@ function Layout() {
 }
 
 function Home() {
-  return <div className="flex flex-1">Hello, Home!</div>
+  return (
+    <>
+      <main className="prose max-w-none py-2 gap-2 flex flex-1 flex-col">
+        <div className="flex w-full justify-between gap-2">
+          <input className="bg-slate-600 flex-1 text-center text-gray-100 rounded" type="button" value="Cars"></input>
+          <input className="bg-slate-600 flex-1 text-center text-gray-100 rounded" type="button" value="Cars"></input>
+          <input className="bg-slate-600 flex-1 text-center text-gray-100 rounded" type="button" value="Cars"></input>
+        </div>
+        <div className="flex w-full justify-between gap-2">
+          <input className="bg-slate-600 flex-1 text-center text-gray-100 rounded" type="button" value="Cars"></input>
+          <input className="bg-slate-600 flex-1 text-center text-gray-100 rounded" type="button" value="Cars"></input>
+          <input className="bg-slate-600 flex-1 text-center text-gray-100 rounded" type="button" value="Cars"></input>
+        </div>
+      </main>
+    </>
+  )
 }
 
 function Test() {
