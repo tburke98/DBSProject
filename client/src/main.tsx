@@ -11,7 +11,6 @@ import {CarProfile, Package, Engine, Phone, Truck, UserList} from "@phosphor-ico
 import '@ag-grid-community/styles/ag-grid.css'
 import '@ag-grid-community/styles/ag-theme-alpine.css'
 import './index.css'
-import logo from './assets/car-logo.jpg'
 
 import Expenses from './pages/Expenses'
 
@@ -41,7 +40,6 @@ function Layout() {
     <>
       <div className="flex flex-col w-full min-h-screen">
         <div className="bg-[#34332f] text-blue-100 p-4 w-full flex gap-4">
-          <img src={logo} alt="logo" />
           <Link to="/">Home</Link>
           <Link to="/test">Test</Link>
           <Link to="/expenses">Expenses</Link>
