@@ -6,7 +6,7 @@ import {configure} from 'axios-hooks'
 import Axios from 'axios'
 import {ModuleRegistry} from '@ag-grid-community/core'
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {CarProfile, Package, Engine, Phone, Truck, UserList} from "@phosphor-icons/react";
+import {Package, Engine, Truck, UserPlus, HandCoins, ChartLineUp} from "@phosphor-icons/react";
 
 import '@ag-grid-community/styles/ag-grid.css'
 import '@ag-grid-community/styles/ag-theme-alpine.css'
@@ -59,49 +59,51 @@ function Home() {
   return (
     <>
       <div className="w-full gap-4 flex flex-col">
-        <div className="mx-auto my-24 gap-4 p-4 text-center text-blue-100 rounded-lg flex flex-col">
+        <div className="mx-auto mt-24 gap-4 p-4 text-center text-blue-100 rounded-lg flex flex-col">
           <span className="font-bold text-4xl">MUC Database</span>
-          <span className="font-semibold">Group 5: Ethan Cooke, Justin Kaiser, Travis Burke</span>
+          <span className="font-semibold">Ethan Cooke, Justin Kaiser, Travis Burke</span>
         </div>
-        <div className="w-full flex flex-col gap-4">
-          <div className="flex flex-col md:flex-row w-full justify-between gap-4">
-            <div className="table-buttons">
-              <div className="table-icons">
-                <CarProfile size={96} />
+        <div className="w-full flex h-full items-center">
+          <div className="flex w-full flex-col gap-4">
+            <div className="flex flex-col md:flex-row w-full justify-between gap-4">
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <Truck size={96} />
+                </div>
+                <span>Orders</span>
               </div>
-              <span>Cars</span>
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <Package size={96} />
+                </div>
+                <span>Suppliers</span>
+              </div>
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <Engine size={96} />
+                </div>
+                <span>Parts</span>
+              </div>
             </div>
-            <div className="table-buttons">
-              <div className="table-icons">
-                <Package size={96} />
+            <div className="flex flex-col md:flex-row w-full justify-between gap-4">
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <ChartLineUp size={96} />
+                </div>
+                <span>Budget Projection</span>
               </div>
-              <span>Suppliers</span>
-            </div>
-            <div className="table-buttons">
-              <div className="table-icons">
-                <Engine size={96} />
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <UserPlus size={96} />
+                </div>
+                <span>New Supplier</span>
               </div>
-              <span>Parts</span>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row w-full justify-between gap-4">
-          <div className="table-buttons">
-              <div className="table-icons">
-                <Truck size={96} />
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <HandCoins size={96} />
+                </div>
+                <span>Annual Expenses</span>
               </div>
-              <span>Orders</span>
-            </div>
-            <div className="table-buttons">
-              <div className="table-icons">
-                <Phone size={96} />
-              </div>
-              <span>Supplier Numbers</span>
-            </div>
-            <div className="table-buttons">
-              <div className="table-icons">
-                <UserList size={96} />
-              </div>
-              <span>Customers</span>
             </div>
           </div>
         </div>
