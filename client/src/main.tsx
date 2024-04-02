@@ -6,6 +6,7 @@ import {configure} from 'axios-hooks'
 import Axios from 'axios'
 import {ModuleRegistry} from '@ag-grid-community/core'
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
+import {Package, Engine, Truck, UserPlus, HandCoins, ChartLineUp} from '@phosphor-icons/react'
 
 import '@ag-grid-community/styles/ag-grid.css'
 import '@ag-grid-community/styles/ag-theme-alpine.css'
@@ -37,21 +38,82 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 function Layout() {
   return (
     <>
-      <div className="bg-blue-800 text-white p-4 w-full flex gap-4">
-        <Link to="/">Home</Link>
-        <Link to="/test">Test</Link>
-        <Link to="/expenses">Expenses</Link>
+      <div className="flex flex-col w-full min-h-screen">
+        <div className="bg-[#34332f] text-blue-100 p-4 w-full flex gap-4">
+          <Link to="/">Home</Link>
+          <Link to="/test">Test</Link>
+          <Link to="/expenses">Expenses</Link>
+        </div>
+        <div className="flex bg-[#3e3d39] flex-grow justify-center">
+          <div className="flex w-full p-4 max-w-7xl">
+            <Outlet />
+          </div>
+        </div>
+        <div className="bg-[#34332f] text-blue-100 p-2 w-full text-center">
+          &copy; CSCI 3461 Database Systems Group 5
+        </div>
       </div>
-      <Outlet />
-      <div className="bg-blue-800 text-white p-2 w-full text-center">&copy; CSCI 3461 Database Systems Group 5</div>
     </>
   )
 }
 
 function Home() {
-  return <div>Hello, Home!</div>
+  return (
+    <>
+      <div className="w-full gap-4 flex flex-col">
+        <div className="mx-auto mt-24 gap-4 p-4 text-center text-blue-100 rounded-lg flex flex-col">
+          <span className="font-bold text-4xl">MUC Database</span>
+          <span className="font-semibold">Ethan Cooke, Justin Kaiser, Travis Burke</span>
+        </div>
+        <div className="w-full flex h-full items-center">
+          <div className="flex w-full flex-col gap-4">
+            <div className="flex flex-col md:flex-row w-full justify-between gap-4">
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <Truck size={96} />
+                </div>
+                <span>Orders</span>
+              </div>
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <Package size={96} />
+                </div>
+                <span>Suppliers</span>
+              </div>
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <Engine size={96} />
+                </div>
+                <span>Parts</span>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row w-full justify-between gap-4">
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <ChartLineUp size={96} />
+                </div>
+                <span>Budget Projection</span>
+              </div>
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <UserPlus size={96} />
+                </div>
+                <span>New Supplier</span>
+              </div>
+              <div className="table-buttons">
+                <div className="table-icons">
+                  <HandCoins size={96} />
+                </div>
+                <span>Annual Expenses1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
 function Test() {
-  return <div>Hello, Test!</div>
+  return <div className="flex flex-grow">Hello, Test!</div>
 }
