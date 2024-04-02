@@ -18,8 +18,8 @@ dependencies:
     specifier: ^31.1.1
     version: 31.1.1
   '@phosphor-icons/react':
-    specifier: ^2.0.15
-    version: 2.0.15(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^2.1.4
+    version: 2.1.4(react-dom@18.2.0)(react@18.2.0)
   autoprefixer:
     specifier: ^10.4.18
     version: 10.4.18(postcss@8.4.35)
@@ -677,8 +677,8 @@ packages:
       fastq: 1.17.1
     dev: true
 
-  /@phosphor-icons/react@2.0.15(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-PQKNcRrfERlC8gJGNz0su0i9xVmeubXSNxucPcbCLDd9u0cwJVTEyYK87muul/svf0UXFdL2Vl6bbeOhT1Mwow==}
+  /@phosphor-icons/react@2.1.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-EeNwgcg1aeK5vG/JYVTullnZzk5zjftOrjLb1iYetyhn5ImFFREc+xG0FAB/dAY277DGDSF8pNdNbqG1SUKIxQ==}
     engines: {node: '>=10'}
     peerDependencies:
       react: '>= 16.8'

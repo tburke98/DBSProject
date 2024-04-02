@@ -14,7 +14,7 @@
     "@ag-grid-community/core": "^31.1.1",
     "@ag-grid-community/react": "^31.1.1",
     "@ag-grid-community/styles": "^31.1.1",
-    "@phosphor-icons/react": "^2.0.15",
+    "@phosphor-icons/react": "^2.1.4",
     "autoprefixer": "^10.4.18",
     "axios": "^1.6.7",
     "axios-hooks": "^5.0.2",
