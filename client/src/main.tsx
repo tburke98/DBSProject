@@ -6,7 +6,7 @@ import {configure} from 'axios-hooks'
 import Axios from 'axios'
 import {ModuleRegistry} from '@ag-grid-community/core'
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {Package, Engine, Truck, UserPlus, HandCoins, ChartLineUp} from "@phosphor-icons/react";
+import {Package, Engine, Truck, UserPlus, HandCoins, ChartLineUp} from '@phosphor-icons/react'
 
 import '@ag-grid-community/styles/ag-grid.css'
 import '@ag-grid-community/styles/ag-theme-alpine.css'
@@ -45,11 +45,13 @@ function Layout() {
           <Link to="/expenses">Expenses</Link>
         </div>
         <div className="flex bg-[#3e3d39] flex-grow justify-center">
-            <div className="flex w-full p-4 max-w-7xl">
-              <Outlet />
-            </div>
+          <div className="flex w-full p-4 max-w-7xl">
+            <Outlet />
+          </div>
         </div>
-        <div className="bg-[#34332f] text-blue-100 p-2 w-full text-center">&copy; CSCI 3461 Database Systems Group 5</div>
+        <div className="bg-[#34332f] text-blue-100 p-2 w-full text-center">
+          &copy; CSCI 3461 Database Systems Group 5
+        </div>
       </div>
     </>
   )
