@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from os import environ as env
 from mysql.connector import connect as db_connect
 
@@ -12,21 +13,33 @@ db_config = {
 }
 
 db_pool = db_connect(**db_config)
-
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 def query(query: str) -> list:
-    with db_pool.cursor() as db:
+    with db_pool.cursor(dictionary=True) as db:
         db.execute(query)
         return db.fetchall()
 
 
-@app.route("/orders")
+@app.route("/api/orders")
 def read_orders_all() -> list:
-    return query(f"SELECT * FROM order_parts")
+    order_query = """
+
+    SELECT o._id, o.supplier_id, o.order_date, p.part_id, p.quantity
+    FROM orders AS o
+    LEFT JOIN order_parts AS p ON o._id = p.order_id
+    """
+
+    return query(order_query)
 
 
-@app.route("/suppliers")
+@app.route("/api/suppliers")
 def read_suppliers_all() -> list:
-    return query(f"SELECT * FROM suppliers, phone_numbers WHERE _id = supplier_id ")
+    supplier_query = """
+      select s._id, s.name, s.email, group_concat(distinct p.phone_number separator ', ') as phones from suppliers as s
+      join phone_numbers as p ON s._id = p.supplier_id
+      group by s._id
+    """
+    return query(supplier_query)
