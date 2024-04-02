@@ -22,11 +22,11 @@ def query(query: str) -> list:
         return db.fetchall()
 
 
-@app.route("/table")
-def read_table_all() -> list:
-    return query(f"select * from my_table")
+@app.route("/orders")
+def read_orders_all() -> list:
+    return query(f"SELECT * FROM order_parts")
 
 
-@app.route("/table/<id>")
-def read_table(id: int) -> list:
-    return query(f"select * from my_table where id = {id}")
+@app.route("/suppliers")
+def read_suppliers_all() -> list:
+    return query(f"SELECT * FROM suppliers, phone_numbers WHERE _id = supplier_id ")
