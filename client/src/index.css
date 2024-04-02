@@ -12,3 +12,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.table-buttons {
+  @apply flex-1 bg-[#34332f] hover:bg-[#292825] text-blue-100 text-center rounded-lg text-2xl py-4 flex flex-col;
+}
+
+.table-icons {
+  @apply m-auto text-blue-300;
+}

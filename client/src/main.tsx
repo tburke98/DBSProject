@@ -104,7 +104,7 @@ function Home() {
                 <div className="table-icons">
                   <HandCoins size={96} />
                 </div>
-                <span>Annual Expenses1</span>
+                <span>Annual Expenses</span>
               </div>
             </div>
           </div>
