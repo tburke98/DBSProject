@@ -1,0 +1,44 @@
+import useAxios from 'axios-hooks'
+import {AgGridReact} from '@ag-grid-community/react'
+import {useState} from 'react'
+
+import type {ColDef, GridOptions} from '@ag-grid-community/core'
+
+interface Orders {
+  id: number
+  sid: number
+  date: string
+  pid: number
+  quantity: number
+}
+
+export default function Orders() {
+  const [{data, loading, error}] = useAxios<Orders[], any, any>({
+    url: 'orders',
+    method: 'GET'
+  })
+
+  const [columnDefs, _] = useState<ColDef[]>([
+    {field: '_id', headerName: 'Order ID'},
+    {field: 'supplier_id', headerName: 'Supplier ID'},
+    {field: 'order_date', headerName: 'Order Date'},
+    {field: 'part_id', headerName: 'Part IDs'},
+    {field: 'quantity', headerName: 'Quantity'}
+  ])
+
+  if (loading || error) {
+    return <div>Loading...</div>
+  }
+
+  const gridOptions: GridOptions = {
+    autoSizeStrategy: {
+      type: 'fitCellContents'
+    }
+  }
+
+  return (
+    <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
+      <AgGridReact rowData={data} columnDefs={columnDefs} gridOptions={gridOptions} />
+    </div>
+  )
+}

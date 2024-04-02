@@ -13,6 +13,8 @@ import '@ag-grid-community/styles/ag-theme-alpine.css'
 import './index.css'
 
 import Expenses from './pages/Expenses'
+import Suppliers from './pages/Suppliers'
+import Orders from './pages/Orders'
 
 const axios = Axios.create({
   baseURL: import.meta.env.VITE_API_URL
@@ -24,7 +26,8 @@ ModuleRegistry.registerModules([ClientSideRowModelModule])
 const routes = [
   {index: true, element: <Home />},
   {path: '/expenses', element: <Expenses />},
-  {path: '/test', element: <Test />}
+  {path: '/Suppliers', element: <Suppliers />},
+  {path: '/Orders', element: <Orders />}
 ]
 
 const routerRoot = [{path: '/', element: <Layout />, children: routes}]
@@ -39,17 +42,18 @@ function Layout() {
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
-        <div className="bg-[#34332f] text-blue-100 p-4 w-full flex gap-4">
+        <div className="bg-neutral-900 text-blue-100 p-4 w-full flex gap-4">
           <Link to="/">Home</Link>
-          <Link to="/test">Test</Link>
+          <Link to="/Suppliers">Suppliers</Link>
+          <Link to="/Orders">Orders</Link>
           <Link to="/expenses">Expenses</Link>
         </div>
-        <div className="flex bg-[#3e3d39] flex-grow justify-center">
+        <div className="flex bg-neutral-800 flex-grow justify-center">
           <div className="flex w-full p-4 max-w-7xl">
             <Outlet />
           </div>
         </div>
-        <div className="bg-[#34332f] text-blue-100 p-2 w-full text-center">
+        <div className="bg-neutral-900 text-blue-100 p-2 w-full text-center">
           &copy; CSCI 3461 Database Systems Group 5
         </div>
       </div>
@@ -112,8 +116,4 @@ function Home() {
       </div>
     </>
   )
-}
-
-function Test() {
-  return <div className="flex flex-grow">Hello, Test!</div>
 }
