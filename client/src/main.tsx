@@ -15,6 +15,7 @@ import './index.css'
 import Expenses from './pages/Expenses'
 import Suppliers from './pages/Suppliers'
 import Orders from './pages/Orders'
+import Budget from './pages/Budget'
 
 const axios = Axios.create({
   baseURL: import.meta.env.VITE_API_URL
@@ -27,7 +28,8 @@ const routes = [
   {index: true, element: <Home />},
   {path: '/expenses', element: <Expenses />},
   {path: '/Suppliers', element: <Suppliers />},
-  {path: '/Orders', element: <Orders />}
+  {path: '/Orders', element: <Orders />},
+  {path: '/Budget', element: <Budget />}
 ]
 
 const routerRoot = [{path: '/', element: <Layout />, children: routes}]
