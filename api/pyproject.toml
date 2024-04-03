@@ -4,10 +4,11 @@ version = "0.1.0"
 description = "Default template for PDM package"
 authors = [{ name = "CSCI 3461 Group 5" }]
 dependencies = [
-    "flask>=3.0.2",
+    "flask[async]>=3.0.2",
     "python-dotenv>=1.0.1",
     "mysql-connector-python>=8.3.0",
     "flask-cors>=4.0.0",
+    "pydantic>=2.6.4",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

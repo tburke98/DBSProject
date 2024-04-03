@@ -1,7 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+import re
 from flask_cors import CORS
 from os import environ as env
 from mysql.connector import connect as db_connect
+from pydantic import BaseModel, ValidationError, Field
+
+from typing import Tuple, Any
 
 db_config = {
     "host": env.get("DB_HOST"),
@@ -17,9 +21,15 @@ app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
-def query(query: str) -> list:
+def insert(query: str, args: Tuple[Any] = None) -> None:
     with db_pool.cursor(dictionary=True) as db:
-        db.execute(query)
+        db.execute(query, args)
+        db_pool.commit()
+
+
+def query(query: str, args: Tuple[Any] = None) -> list:
+    with db_pool.cursor(dictionary=True) as db:
+        db.execute(query, args)
         return db.fetchall()
 
 
@@ -36,10 +46,48 @@ def read_orders_all() -> list:
 
 
 @app.route("/api/suppliers")
-def read_suppliers_all() -> list:
+def read_suppliers() -> list:
     supplier_query = """
       select s._id, s.name, s.email, group_concat(distinct p.phone_number separator ', ') as phones from suppliers as s
       join phone_numbers as p ON s._id = p.supplier_id
       group by s._id
     """
     return query(supplier_query)
+
+
+@app.route("/api/suppliers/<_id>")
+def read_supplier(_id: int) -> list:
+    supplier_query = """
+      select s._id, s.name, s.email, group_concat(distinct p.phone_number separator ', ') as phones from suppliers as s
+      join phone_numbers as p ON s._id = p.
+      where s._id = %s
+      group by s._id
+    """
+    return query(supplier_query, (_id,))
+
+
+class Supplier(BaseModel):
+    id: int = Field(alias="_id")
+    name: str
+    email: str
+    phones: str
+
+
+@app.route("/api/add_supplier", methods=["POST"])
+def add_supplier() -> str:
+    try:
+        s = Supplier(**request.json)
+    except ValidationError as e:
+        return ("Invalid POST data!", 400)
+
+    add_supplier_query = f"insert into suppliers (_id, name, email) values (%s, %s, %s)"
+    insert(add_supplier_query, (s.id, s.name, s.email))
+
+    regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
+    phone_numbers = re.findall(regex, s.phones)
+    for num in phone_numbers:
+        phone_query = (
+            f"insert into phone_numbers (phone_numbers, supplier_id) values (%s, %s)"
+        )
+        insert(phone_query, (num, s.id))
+    return "Supplier inserted."
