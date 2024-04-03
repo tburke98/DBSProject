@@ -6,7 +6,7 @@ import {configure} from 'axios-hooks'
 import Axios from 'axios'
 import {ModuleRegistry} from '@ag-grid-community/core'
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {House, Package, Engine, Truck, UserPlus, PresentationChart, ChartLineUp} from '@phosphor-icons/react'
+import {House, Package, Engine, Truck, UserPlus, ChartLineUp, Invoice} from '@phosphor-icons/react'
 
 import '@ag-grid-community/styles/ag-grid.css'
 import '@ag-grid-community/styles/ag-theme-alpine.css'
@@ -56,7 +56,7 @@ function Layout() {
             <span> &nbsp;Orders</span>
           </Link>
           <Link to="/expenses" className="flex items-center">
-            <PresentationChart size={20} />
+            <Invoice size={20} />
             <span> &nbsp;Expense Tracker</span>
           </Link>
           <Link to="/budget" className="flex items-center">
@@ -122,7 +122,7 @@ function Home() {
               </div>
               <div className="table-buttons">
                 <div className="table-icons">
-                  <PresentationChart size={96} />
+                  <Invoice size={96} />
                 </div>
                 <span>Annual Expenses</span>
               </div>
