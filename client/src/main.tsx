@@ -6,7 +6,7 @@ import {configure} from 'axios-hooks'
 import Axios from 'axios'
 import {ModuleRegistry} from '@ag-grid-community/core'
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {Package, Engine, Truck, UserPlus, HandCoins, ChartLineUp} from '@phosphor-icons/react'
+import {House, Package, Engine, Truck, UserPlus, PresentationChart, ChartLineUp} from '@phosphor-icons/react'
 
 import '@ag-grid-community/styles/ag-grid.css'
 import '@ag-grid-community/styles/ag-theme-alpine.css'
@@ -42,19 +42,35 @@ function Layout() {
   return (
     <>
       <div className="flex flex-col w-full min-h-screen">
-        <div className="bg-neutral-900 text-blue-100 p-4 w-full flex gap-4">
-          <Link to="/">Home</Link>
-          <Link to="/Suppliers">Suppliers</Link>
-          <Link to="/Orders">Orders</Link>
-          <Link to="/expenses">Expenses</Link>
+        <div className="bg-neutral-900 text-neutral-200 p-4 w-full flex justify-content-center gap-4">
+          <Link to="/" className="flex items-center">
+            <House size={20} />
+            <span> &nbsp;Home</span>
+          </Link>
+          <Link to="/Suppliers" className="flex items-center">
+            <Package size={20} />
+            <span> &nbsp;Suppliers</span>
+          </Link>
+          <Link to="/Orders" className="flex items-center">
+            <Truck size={20} />
+            <span> &nbsp;Orders</span>
+          </Link>
+          <Link to="/expenses" className="flex items-center">
+            <PresentationChart size={20} />
+            <span> &nbsp;Expense Tracker</span>
+          </Link>
+          <Link to="/budget" className="flex items-center">
+            <ChartLineUp size={20} />
+            <span> &nbsp;Budget Projection</span>
+          </Link>
         </div>
         <div className="flex bg-neutral-800 flex-grow justify-center">
           <div className="flex w-full p-4 max-w-7xl">
             <Outlet />
           </div>
         </div>
-        <div className="bg-neutral-900 text-blue-100 p-2 w-full text-center">
-          &copy; CSCI 3461 Database Systems Group 5
+        <div className="bg-neutral-900 text-neutral-200 p-2 w-full text-center">
+          CSCI 3461 Database Systems - Saint Mary's University &copy; Group 5 2024
         </div>
       </div>
     </>
@@ -65,7 +81,7 @@ function Home() {
   return (
     <>
       <div className="w-full gap-4 flex flex-col">
-        <div className="mx-auto mt-24 gap-4 p-4 text-center text-blue-100 rounded-lg flex flex-col">
+        <div className="mx-auto mt-24 gap-4 p-4 text-center text-natural-200 rounded-lg flex flex-col">
           <span className="font-bold text-4xl">MUC Database</span>
           <span className="font-semibold">Ethan Cooke, Justin Kaiser, Travis Burke</span>
         </div>
@@ -106,7 +122,7 @@ function Home() {
               </div>
               <div className="table-buttons">
                 <div className="table-icons">
-                  <HandCoins size={96} />
+                  <PresentationChart size={96} />
                 </div>
                 <span>Annual Expenses</span>
               </div>

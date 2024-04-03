@@ -22,8 +22,7 @@ export default function Orders() {
     {field: '_id', headerName: 'Order ID'},
     {field: 'supplier_id', headerName: 'Supplier ID'},
     {field: 'order_date', headerName: 'Order Date'},
-    {field: 'part_id', headerName: 'Part IDs'},
-    {field: 'quantity', headerName: 'Quantity'}
+    {field: 'parts_and_quantities', headerName: 'Part ID : Quantity'}
   ])
 
   if (loading || error) {

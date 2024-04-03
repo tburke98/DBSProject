@@ -26,12 +26,12 @@ def query(query: str) -> list:
 @app.route("/api/orders")
 def read_orders_all() -> list:
     order_query = """
-
-    SELECT o._id, o.supplier_id, o.order_date, p.part_id, p.quantity
-    FROM orders AS o
-    LEFT JOIN order_parts AS p ON o._id = p.order_id
+       select o._id, o.supplier_id, o.order_date, 
+       group_concat(CONCAT(p.part_id, ':', p.quantity) separator ', ') AS parts_and_quantities
+       from orders AS o
+       left join order_parts AS p ON o._id = p.order_id
+       group by o._id;
     """
-
     return query(order_query)
 
 
