@@ -6,7 +6,7 @@ import {configure} from 'axios-hooks'
 import Axios from 'axios'
 import {ModuleRegistry} from '@ag-grid-community/core'
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
-import {House, Package, Engine, Truck, UserPlus, ChartLineUp, Invoice} from '@phosphor-icons/react'
+import {House, Package, Engine, Truck, UserPlus, ChartLineUp, PresentationChart} from '@phosphor-icons/react'
 
 import '@ag-grid-community/styles/ag-grid.css'
 import '@ag-grid-community/styles/ag-theme-alpine.css'
@@ -26,8 +26,8 @@ ModuleRegistry.registerModules([ClientSideRowModelModule])
 const routes = [
   {index: true, element: <Home />},
   {path: '/expenses', element: <Expenses />},
-  {path: '/Suppliers', element: <Suppliers />},
-  {path: '/Orders', element: <Orders />}
+  {path: '/suppliers', element: <Suppliers />},
+  {path: '/orders', element: <Orders />}
 ]
 
 const routerRoot = [{path: '/', element: <Layout />, children: routes}]
@@ -47,16 +47,16 @@ function Layout() {
             <House size={20} />
             <span> &nbsp;Home</span>
           </Link>
-          <Link to="/Suppliers" className="flex items-center">
+          <Link to="/suppliers" className="flex items-center">
             <Package size={20} />
             <span> &nbsp;Suppliers</span>
           </Link>
-          <Link to="/Orders" className="flex items-center">
+          <Link to="/orders" className="flex items-center">
             <Truck size={20} />
             <span> &nbsp;Orders</span>
           </Link>
           <Link to="/expenses" className="flex items-center">
-            <Invoice size={20} />
+            <PresentationChart size={20} />
             <span> &nbsp;Expense Tracker</span>
           </Link>
           <Link to="/budget" className="flex items-center">
@@ -122,7 +122,7 @@ function Home() {
               </div>
               <div className="table-buttons">
                 <div className="table-icons">
-                  <Invoice size={96} />
+                  <PresentationChart size={96} />
                 </div>
                 <span>Annual Expenses</span>
               </div>
