@@ -57,10 +57,10 @@ def read_suppliers() -> list:
 
 @app.route("/api/suppliers/<_id>")
 def read_supplier(_id: int) -> list:
-    supplier_query = """
+    supplier_query = f"""
       select s._id, s.name, s.email, group_concat(distinct p.phone_number separator ', ') as phones from suppliers as s
       join phone_numbers as p ON s._id = p.
-      where s._id = %s
+      where s._id = {_id}
       group by s._id
     """
     return query(supplier_query, (_id,))
