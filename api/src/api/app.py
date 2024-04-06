@@ -1,11 +1,14 @@
-from flask import Flask, jsonify, request
-import re
+from flask import Flask, request as req
 from flask_cors import CORS
 from os import environ as env
 from mysql.connector import connect as db_connect
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import ValidationError
+import re
+from datetime import date
 
-from typing import Tuple, Any
+# from models import Supplier, YearRange
+
+from typing import List, Tuple, Any
 
 db_config = {
     "host": env.get("DB_HOST"),
@@ -66,7 +69,18 @@ def read_supplier(_id: int) -> list:
     """
     return query(supplier_query, (_id,))
 
-
+@app.route("/api/budget")
+def read_budget() -> list:
+    year = date.today().year - 1
+    budget_query = f"""
+      select sum(parts.price * order_parts.quantity) as expenses from orders
+      join order_parts on orders._id=order_parts.order_id
+      join parts on order_parts.part_id=parts._id
+      where year(orders.order_date) = {year}
+      group by year(orders.order_date)
+    """
+    return query(budget_query)[0]
+  
 class Supplier(BaseModel):
     name: str
     email: str
