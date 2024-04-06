@@ -30,13 +30,28 @@ export default function Suppliers() {
 
   const gridOptions: GridOptions = {
     autoSizeStrategy: {
-      type: 'fitCellContents'
+      type: 'fitGridWidth'
+    },
+    defaultColDef: {
+      filter: true,
+      sortable: true,
+      resizable: true
     }
   }
 
   return (
     <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
-      <AgGridReact rowData={data} columnDefs={columnDefs} gridOptions={gridOptions} />
+      <AgGridReact
+        rowData={data}
+        columnDefs={columnDefs}
+        gridOptions={gridOptions}
+        suppressRowClickSelection={true}
+        groupSelectsChildren={true}
+        rowSelection={'multiple'}
+        rowGroupPanelShow={'always'}
+        pivotPanelShow={'always'}
+        pagination={true}
+      />
     </div>
   )
 }

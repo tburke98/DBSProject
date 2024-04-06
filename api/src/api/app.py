@@ -58,34 +58,16 @@ def read_suppliers() -> list:
     return query(supplier_query)
 
 
+
 @app.route("/api/suppliers/<_id>")
 def read_supplier(_id: int) -> list:
-    supplier_query = """
+    supplier_query = f"""
       select s._id, s.name, s.email, group_concat(distinct p.phone_number separator ', ') as phones from suppliers as s
       join phone_numbers as p ON s._id = p.
-      where s._id = %s
+      where s._id = {_id}
       group by s._id
     """
     return query(supplier_query, (_id,))
-
-
-@app.route("/api/add_supplier", methods=["POST"])
-def add_supplier() -> str:
-    try:
-        s = Supplier(**req.json)
-    except ValidationError:
-        return ("Invalid POST data!", 400)
-
-    add_supplier_query = "insert into suppliers (_id, name, email) values (%s, %s, %s)"
-    insert(add_supplier_query, (s.id, s.name, s.email))
-
-    regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
-    phone_numbers = re.findall(regex, s.phones)
-    phone_query = "insert into phone_numbers (phone_numbers, supplier_id) values (%s, %s)"
-    [insert(phone_query, (p, s.id)) for p in phone_numbers]
-
-    return "Supplier inserted."
-
 
 @app.route("/api/budget")
 def read_budget() -> list:
@@ -98,3 +80,40 @@ def read_budget() -> list:
       group by year(orders.order_date)
     """
     return query(budget_query)[0]
+  
+class Supplier(BaseModel):
+    name: str
+    email: str
+    phones: str
+
+
+@app.route("/api/add_supplier", methods=["POST"])
+def add_supplier() -> str:
+    try:
+        supplier_data = request.json
+        s = Supplier(**supplier_data)
+    except (ValidationError, ValueError) as e:
+        return ("Invalid POST data!", 400)
+    add_supplier_query = "insert into suppliers (name, email) values (%s, %s)"
+    insert(add_supplier_query, (s.name, s.email))
+    regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
+    phone_numbers = re.findall(regex, s.phones)
+    for num in phone_numbers:
+        phone_query = (
+            "insert into phone_numbers (phone_number, supplier_id) values (%s, %s)"
+        )
+        insert(phone_query, (num, s.id))
+    return "Supplier inserted."
+
+@app.route("/api/expenses/<start>/<end>")
+def read_expenses_all(start, end) -> list:
+    expenses_query = f"""
+      SELECT DATE_FORMAT(o.order_date, '%Y') as year, sum(op.quantity * p.price) as total_expense
+      FROM orders as o
+      JOIN order_parts as op ON o._id = op.order_id
+      JOIN parts as p ON op.part_id = p._id
+      WHERE DATE_FORMAT(o.order_date, '%Y') BETWEEN {start} AND {end}
+      GROUP BY DATE_FORMAT(o.order_date, '%Y');
+    """
+    return query(expenses_query)
+
