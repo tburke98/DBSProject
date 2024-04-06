@@ -38,6 +38,10 @@
 }
 
 .form-text {
-  @apply rounded-md py-1 px-2;
+  @apply rounded-md py-1 px-2 bg-[#353535];
+}
+
+.form-card {
+  @apply bg-[#202020] rounded-lg gap-4 p-4 justify-center;
 }
 

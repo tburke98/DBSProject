@@ -58,7 +58,7 @@ export default function AddSuppliers() {
   return (
     <>
       <div className="flex flex-col w-full gap-4 justify-center items-center">
-        <div className="flex flex-col max-w-2xl w-full justify-center gap-4 p-4 mb-32">
+        <div className="flex flex-col max-w-2xl form-card w-full mb-32">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row gap-4 w-full">
               <div className="flex flex-col gap-2 flex-grow">
