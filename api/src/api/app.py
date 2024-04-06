@@ -1,11 +1,14 @@
-from flask import Flask, jsonify, request
-import re
+from flask import Flask, request as req
 from flask_cors import CORS
 from os import environ as env
 from mysql.connector import connect as db_connect
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import ValidationError
+import re
+from datetime import date
 
-from typing import Tuple, Any
+# from models import Supplier, YearRange
+
+from typing import List, Tuple, Any
 
 db_config = {
     "host": env.get("DB_HOST"),
@@ -66,28 +69,32 @@ def read_supplier(_id: int) -> list:
     return query(supplier_query, (_id,))
 
 
-class Supplier(BaseModel):
-    id: int = Field(alias="_id")
-    name: str
-    email: str
-    phones: str
-
-
 @app.route("/api/add_supplier", methods=["POST"])
 def add_supplier() -> str:
     try:
-        s = Supplier(**request.json)
-    except ValidationError as e:
+        s = Supplier(**req.json)
+    except ValidationError:
         return ("Invalid POST data!", 400)
 
-    add_supplier_query = f"insert into suppliers (_id, name, email) values (%s, %s, %s)"
+    add_supplier_query = "insert into suppliers (_id, name, email) values (%s, %s, %s)"
     insert(add_supplier_query, (s.id, s.name, s.email))
 
     regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
     phone_numbers = re.findall(regex, s.phones)
-    for num in phone_numbers:
-        phone_query = (
-            f"insert into phone_numbers (phone_numbers, supplier_id) values (%s, %s)"
-        )
-        insert(phone_query, (num, s.id))
+    phone_query = "insert into phone_numbers (phone_numbers, supplier_id) values (%s, %s)"
+    [insert(phone_query, (p, s.id)) for p in phone_numbers]
+
     return "Supplier inserted."
+
+
+@app.route("/api/budget")
+def read_budget() -> list:
+    year = date.today().year - 1
+    budget_query = f"""
+      select sum(parts.price * order_parts.quantity) as expenses from orders
+      join order_parts on orders._id=order_parts.order_id
+      join parts on order_parts.part_id=parts._id
+      where year(orders.order_date) = {year}
+      group by year(orders.order_date)
+    """
+    return query(budget_query)[0]
