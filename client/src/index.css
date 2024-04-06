@@ -14,7 +14,7 @@
 }
 
 .table-buttons {
-  @apply flex-1 bg-zinc-900 hover:bg-zinc-950 text-neutral-200 text-center rounded-lg text-2xl py-4 flex flex-col;
+  @apply flex-1 bg-zinc-900 hover:cursor-pointer hover:bg-zinc-950 text-neutral-200 text-center rounded-lg text-2xl py-4 flex flex-col;
 }
 
 .table-icons {
@@ -34,7 +34,7 @@
 }
 
 .form-button {
-  @apply bg-zinc-900 hover:bg-zinc-950 text-neutral-200 text-center rounded-md py-1 px-2;
+  @apply bg-zinc-900 hover:cursor-pointer hover:bg-zinc-950 text-neutral-200 text-center rounded-md py-1 px-2;
 }
 
 .form-text {

@@ -96,18 +96,18 @@ function Home() {
         <div className="w-full flex h-full items-center">
           <div className="flex w-full flex-col gap-4">
             <div className="flex flex-col md:flex-row w-full justify-between gap-4">
-              <div className="table-buttons">
+              <Link to='/orders' className="table-buttons">
                 <div className="table-icons">
                   <Truck size={96} />
                 </div>
                 <span>Orders</span>
-              </div>
-              <div className="table-buttons">
+              </Link>
+              <Link to='/suppliers' className="table-buttons">
                 <div className="table-icons">
                   <Package size={96} />
                 </div>
                 <span>Suppliers</span>
-              </div>
+              </Link>
               <div className="table-buttons">
                 <div className="table-icons">
                   <Engine size={96} />
@@ -116,24 +116,24 @@ function Home() {
               </div>
             </div>
             <div className="flex flex-col md:flex-row w-full justify-between gap-4">
-              <div className="table-buttons">
+              <Link to='/budget' className="table-buttons">
                 <div className="table-icons">
                   <ChartLineUp size={96} />
                 </div>
                 <span>Budget Projection</span>
-              </div>
-              <div className="table-buttons">
+              </Link>
+              <Link to='addsupplier' className="table-buttons">
                 <div className="table-icons">
                   <UserPlus size={96} />
                 </div>
                 <span>New Supplier</span>
-              </div>
-              <div className="table-buttons">
+              </Link>
+              <Link to='expenses' className="table-buttons">
                 <div className="table-icons">
                   <PresentationChart size={96} />
                 </div>
                 <span>Annual Expenses</span>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

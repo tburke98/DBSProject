@@ -71,8 +71,8 @@ export default function AddSuppliers() {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="phones">Phone Numbers(comma separated): </label>
-              <input id="phones" {...register('phones', {required: true})} placeholder="x(xxx)xxx-xxxx" className='form-text'/>
+              <label htmlFor="phones">Phone Numbers: </label>
+              <input id="phones" {...register('phones', {required: true})} placeholder="x(xxx)xxx-xxxx, x(xxx)xxx-xxxx, ..." className='form-text'/>
             </div>
             <div className="flex flex-col md:flex-row w-full gap-4">
               <button type="submit" value="Submit" className="form-button w-full min-w-24">
