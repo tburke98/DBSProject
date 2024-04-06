@@ -29,8 +29,15 @@ export default function Expenses() {
   })
 
   const [columnDefs, _] = useState<ColDef[]>([
-    {field: 'year', headerName: 'Year', sort: "asc"},
-    {field: 'total_expense', headerName: 'Total Expenses'},
+    {
+      field: 'year',
+      headerName: 'Year',
+      sort: "asc",
+    },
+    {
+      field: 'total_expense',
+      headerName: 'Total Expenses',
+    },
   ])
 
   if (loading) {
@@ -42,19 +49,23 @@ export default function Expenses() {
 
   const gridOptions: GridOptions = {
     autoSizeStrategy: {
-      type: 'fitCellContents'
+      type: 'fitGridWidth'
     }
   }
 
   return (
     <>
       <div className="flex flex-col w-full gap-4">
-        <form className="flex gap-4 p-4" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
-          <label htmlFor="start">Start Year:</label>
-          <input id="start" {...register("startYear", { required: true })} placeholder='startYear' />
-          <label htmlFor="end">End Year:</label>
-          <input id="end" {...register("endYear", { required: true })} placeholder='endYear' />
-          <input type="submit" />
+        <form className="flex flex-col md:flex-row gap-4 p-4 items-center" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
+          <div className="flex gap-2">
+            <label htmlFor="start">Start Year:</label>
+            <input id="start" {...register("startYear", { required: true })} placeholder='startYear' />
+          </div>
+          <div className="flex gap-2">
+            <label htmlFor="end">End Year:</label>
+            <input id="end" {...register("endYear", { required: true })} placeholder='endYear' />
+          </div>
+          <input className="max-w-32 form-button" type="submit" value="Submit" />
         </form>
         <div className="ag-theme-alpine-dark w-full" style={{height: 500}}>
           <AgGridReact rowData={data} columnDefs={columnDefs} gridOptions={gridOptions} />
