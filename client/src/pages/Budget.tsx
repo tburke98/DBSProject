@@ -30,7 +30,7 @@ function BudgetForm(props: BudgetFormProps) {
 
   return (
     <form className='flex w-full justify-center items-center' onSubmit={handleSubmit(data => setBudgetData(data))} noValidate>
-      <div className="form-card max-w-2xl flex flex-col w-full gap-4">
+      <div className="form-card max-w-2xl flex flex-col w-full gap-4 mb-32">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex flex-col gap-2 flex-grow">
             <label htmlFor="years">Enter amount of years</label>

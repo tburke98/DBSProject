@@ -55,17 +55,19 @@ export default function Expenses() {
 
   return (
     <>
-      <div className="flex flex-col w-full gap-4">
-        <form className="flex flex-col md:flex-row justi gap-4 p-4 items-center" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
-          <div className="flex gap-2">
-            <label htmlFor="start">Start Year:</label>
-            <input id="start" {...register("startYear", { required: true })} placeholder='YYYY' className='form-text' />
+      <div className="flex flex-col w-full gap-16 justify-center items-center">
+        <form className="flex flex-col form-card items-center" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="start">Start Year:</label>
+              <input id="start" {...register("startYear", { required: true })} placeholder='YYYY' className='form-text' />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="end">End Year:</label>
+              <input id="end" {...register("endYear", { required: true })} placeholder='YYYY' className='form-text' />
+            </div>
           </div>
-          <div className="flex gap-2">
-            <label htmlFor="end">End Year:</label>
-            <input id="end" {...register("endYear", { required: true })} placeholder='YYYY' className='form-text' />
-          </div>
-          <input className="min-w-24 form-button" type="submit" value="Submit" />
+          <input className="min-w-24 w-full form-button" type="submit" value="Submit" />
         </form>
         <div className="ag-theme-alpine-dark w-full" style={{height: 500}}>
           <AgGridReact rowData={data} columnDefs={columnDefs} gridOptions={gridOptions} />

@@ -74,14 +74,9 @@ export default function AddSuppliers() {
               <label htmlFor="phones">Phone Numbers: </label>
               <input id="phones" {...register('phones', {required: true})} placeholder="x(xxx)xxx-xxxx, x(xxx)xxx-xxxx, ..." className='form-text'/>
             </div>
-            <div className="flex flex-col md:flex-row w-full gap-4">
-              <button type="submit" value="Submit" className="form-button w-full min-w-24">
-                Submit
-              </button>
-              <button type="reset" className="form-button w-full min-w-24">
-                Reset
-              </button>
-            </div>
+            <button type="submit" value="Submit" className="form-button w-full min-w-24">
+              Submit
+            </button>
           </form>
           {isSubmitted && !loading && !error && <div className="success-banner">Submitted successfully!</div>} 
           {error && <div className="error-banner">Submission failed. Please try again.</div>}
