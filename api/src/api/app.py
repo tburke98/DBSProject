@@ -114,3 +114,11 @@ def read_expenses_all(start, end) -> list:
       GROUP BY DATE_FORMAT(o.order_date, '%Y');
     """
     return query(expenses_query)
+
+
+@app.route("/api/parts")
+def read_parts_all() -> list:
+    part_query = """
+       select * from parts
+    """
+    return query(part_query)
