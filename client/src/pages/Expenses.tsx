@@ -28,6 +28,10 @@ export default function Expenses() {
     method: 'GET'
   })
 
+  const numberFormatter = (params: any) => {
+    return params.value.toLocaleString('en-CA', {style: 'currency', currency: 'CAD'})
+  }
+
   const [columnDefs, _] = useState<ColDef[]>([
     {
       field: 'year',
@@ -37,6 +41,8 @@ export default function Expenses() {
     {
       field: 'total_expense',
       headerName: 'Total Expenses',
+      editable: true,
+      valueFormatter: numberFormatter,
     },
   ])
 
