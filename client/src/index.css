@@ -24,3 +24,7 @@
 .Link {
   @apply flex items-center;
 }
+
+.form-button {
+  @apply bg-zinc-900 hover:bg-zinc-950 text-neutral-200 text-center rounded-md py-1 px-2;
+}

@@ -43,3 +43,15 @@ def read_suppliers_all() -> list:
       group by s._id
     """
     return query(supplier_query)
+
+@app.route("/api/expenses/<start>/<end>")
+def read_expenses_all(start, end) -> list:
+    expenses_query = f"""
+      SELECT DATE_FORMAT(o.order_date, '%Y') as year, sum(op.quantity * p.price) as total_expense
+      FROM orders as o
+      JOIN order_parts as op ON o._id = op.order_id
+      JOIN parts as p ON op.part_id = p._id
+      WHERE DATE_FORMAT(o.order_date, '%Y') BETWEEN {start} AND {end}
+      GROUP BY DATE_FORMAT(o.order_date, '%Y');
+    """
+    return query(expenses_query)
