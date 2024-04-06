@@ -59,17 +59,23 @@ export default function AddSuppliers() {
     <>
       <div className="flex flex-col w-full gap-4">
         <div className="flex flex-col justify-center gap-4 p-4">
-          <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-            <label htmlFor="name">Supplier Name: </label>
-            <input id="name" {...register('name', {required: true})} placeholder="" />
-            <label htmlFor="email">Email: </label>
-            <input id="email" {...register('email', {required: true})} placeholder="someone@example.com" />
-            <label htmlFor="phones">Phone Numbers(comma separated): </label>
-            <input id="phones" {...register('phones', {required: true})} placeholder="x(xxx)xxx-xxxx" />
-            <button type="submit" value="Submit" className="submit-button mt-4">
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name">Supplier Name: </label>
+              <input id="name" {...register('name', {required: true})} placeholder="" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email">Email: </label>
+              <input id="email" {...register('email', {required: true})} placeholder="someone@example.com" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="phones">Phone Numbers(comma separated): </label>
+              <input id="phones" {...register('phones', {required: true})} placeholder="x(xxx)xxx-xxxx" />
+            </div>
+            <button type="submit" value="Submit" className="form-button max-w-32">
               Submit
             </button>
-            <button type="reset" className="submit-button mt-4">
+            <button type="reset" className="form-button max-w-32">
               Reset
             </button>
           </form>

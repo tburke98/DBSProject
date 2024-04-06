@@ -56,7 +56,7 @@ export default function Expenses() {
   return (
     <>
       <div className="flex flex-col w-full gap-4">
-        <form className="flex flex-col md:flex-row gap-4 p-4 items-center" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
+        <form className="flex flex-col md:flex-row justi gap-4 p-4 items-center" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
           <div className="flex gap-2">
             <label htmlFor="start">Start Year:</label>
             <input id="start" {...register("startYear", { required: true })} placeholder='startYear' />

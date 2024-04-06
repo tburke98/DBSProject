@@ -17,10 +17,6 @@
   @apply flex-1 bg-zinc-900 hover:bg-zinc-950 text-neutral-200 text-center rounded-lg text-2xl py-4 flex flex-col;
 }
 
-.submit-button {
-  @apply bg-zinc-900 hover:bg-zinc-950 w-20 text-neutral-200 font-bold py-1 px-3 rounded;
-}
-
 .table-icons {
   @apply m-auto text-neutral-200;
 }
