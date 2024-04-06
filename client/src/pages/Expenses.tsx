@@ -59,13 +59,13 @@ export default function Expenses() {
         <form className="flex flex-col md:flex-row justi gap-4 p-4 items-center" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
           <div className="flex gap-2">
             <label htmlFor="start">Start Year:</label>
-            <input id="start" {...register("startYear", { required: true })} placeholder='startYear' />
+            <input id="start" {...register("startYear", { required: true })} placeholder='YYYY' className='form-text' />
           </div>
           <div className="flex gap-2">
             <label htmlFor="end">End Year:</label>
-            <input id="end" {...register("endYear", { required: true })} placeholder='endYear' />
+            <input id="end" {...register("endYear", { required: true })} placeholder='YYYY' className='form-text' />
           </div>
-          <input className="max-w-32 form-button" type="submit" value="Submit" />
+          <input className="min-w-24 form-button" type="submit" value="Submit" />
         </form>
         <div className="ag-theme-alpine-dark w-full" style={{height: 500}}>
           <AgGridReact rowData={data} columnDefs={columnDefs} gridOptions={gridOptions} />
