@@ -67,7 +67,6 @@ def read_supplier(_id: int) -> list:
 
 
 class Supplier(BaseModel):
-    id: int = Field(alias="_id")
     name: str
     email: str
     phones: str
@@ -76,18 +75,17 @@ class Supplier(BaseModel):
 @app.route("/api/add_supplier", methods=["POST"])
 def add_supplier() -> str:
     try:
-        s = Supplier(**request.json)
-    except ValidationError as e:
+        supplier_data = request.json
+        s = Supplier(**supplier_data)
+    except (ValidationError, ValueError) as e:
         return ("Invalid POST data!", 400)
-
-    add_supplier_query = f"insert into suppliers (_id, name, email) values (%s, %s, %s)"
-    insert(add_supplier_query, (s.id, s.name, s.email))
-
+    add_supplier_query = "insert into suppliers (name, email) values (%s, %s)"
+    insert(add_supplier_query, (s.name, s.email))
     regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
     phone_numbers = re.findall(regex, s.phones)
     for num in phone_numbers:
         phone_query = (
-            f"insert into phone_numbers (phone_numbers, supplier_id) values (%s, %s)"
+            "insert into phone_numbers (phone_number, supplier_id) values (%s, %s)"
         )
         insert(phone_query, (num, s.id))
     return "Supplier inserted."
