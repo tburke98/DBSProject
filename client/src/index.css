@@ -36,3 +36,8 @@
 .error-banner {
   @apply py-2 bg-red-600 text-neutral-200;
 }
+
+.form-button {
+  @apply bg-zinc-900 hover:bg-zinc-950 text-neutral-200 text-center rounded-md py-1 px-2;
+}
+
