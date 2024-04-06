@@ -2,12 +2,10 @@ from flask import Flask, request as req
 from flask_cors import CORS
 from os import environ as env
 from mysql.connector import connect as db_connect
-from pydantic import ValidationError
+from pydantic import ValidationError, BaseModel
 import re
+
 from datetime import date
-
-# from models import Supplier, YearRange
-
 from typing import List, Tuple, Any
 
 db_config = {
@@ -58,7 +56,6 @@ def read_suppliers() -> list:
     return query(supplier_query)
 
 
-
 @app.route("/api/suppliers/<_id>")
 def read_supplier(_id: int) -> list:
     supplier_query = f"""
@@ -68,6 +65,7 @@ def read_supplier(_id: int) -> list:
       group by s._id
     """
     return query(supplier_query, (_id,))
+
 
 @app.route("/api/budget")
 def read_budget() -> list:
@@ -80,7 +78,8 @@ def read_budget() -> list:
       group by year(orders.order_date)
     """
     return query(budget_query)[0]
-  
+
+
 class Supplier(BaseModel):
     name: str
     email: str
@@ -99,11 +98,10 @@ def add_supplier() -> str:
     regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
     phone_numbers = re.findall(regex, s.phones)
     for num in phone_numbers:
-        phone_query = (
-            "insert into phone_numbers (phone_number, supplier_id) values (%s, %s)"
-        )
+        phone_query = "insert into phone_numbers (phone_number, supplier_id) values (%s, %s)"
         insert(phone_query, (num, s.id))
     return "Supplier inserted."
+
 
 @app.route("/api/expenses/<start>/<end>")
 def read_expenses_all(start, end) -> list:
@@ -116,4 +114,3 @@ def read_expenses_all(start, end) -> list:
       GROUP BY DATE_FORMAT(o.order_date, '%Y');
     """
     return query(expenses_query)
-
