@@ -15,6 +15,7 @@ import './index.css'
 import Expenses from './pages/Expenses'
 import Suppliers from './pages/Suppliers'
 import Orders from './pages/Orders'
+import Budget from './pages/Budget'
 import AddSuppliers from './pages/AddSupplier'
 
 const axios = Axios.create({
@@ -27,6 +28,7 @@ ModuleRegistry.registerModules([ClientSideRowModelModule])
 const routes = [
   {index: true, element: <Home />},
   {path: '/expenses', element: <Expenses />},
+  {path: '/budget', element: <Budget />},
   {path: '/suppliers', element: <Suppliers />},
   {path: '/orders', element: <Orders />},
   {path: '/addsupplier', element: <AddSuppliers />}
