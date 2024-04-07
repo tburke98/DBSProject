@@ -12,14 +12,13 @@ interface Expense {
 }
 
 export default function Expenses() {
-
   const {
     register,
     handleSubmit,
     reset,
     formState: {errors}
   } = useForm()
-  const [formData, setFormData] = useState('{"startYear":"0", "endYear":"0"}');
+  const [formData, setFormData] = useState('{"startYear":"0", "endYear":"0"}')
 
   const current = JSON.parse(formData)
 
@@ -36,16 +35,16 @@ export default function Expenses() {
     {
       field: 'year',
       headerName: 'Year',
-      sort: "asc",
-      flex: 1,
+      sort: 'asc',
+      flex: 1
     },
     {
       field: 'total_expense',
       headerName: 'Total Expenses',
       editable: true,
       valueFormatter: numberFormatter,
-      flex: 1,
-    },
+      flex: 1
+    }
   ])
 
   if (loading) {
@@ -64,15 +63,32 @@ export default function Expenses() {
   return (
     <>
       <div className="flex flex-col w-full gap-16 justify-center items-center">
-        <form className="flex flex-col form-card items-center" onSubmit={handleSubmit((formdata) => setFormData(JSON.stringify(formdata)))}>
+        <form
+          className="flex flex-col form-card items-center"
+          onSubmit={handleSubmit(formdata => setFormData(JSON.stringify(formdata)))}
+        >
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex flex-col gap-2">
               <label htmlFor="start">Start Year:</label>
-              <input id="start" {...register("startYear", { required: true })} placeholder='YYYY' className='form-text' />
+              <input
+                id="start"
+                {...register('startYear', {required: true})}
+                placeholder="YYYY"
+                type="number"
+                className={cx('form-text', {invalid: errors.startYear})}
+              />
+              {errors.startYear && <p className="text-sm text-red-600">Please input a start year</p>}
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="end">End Year:</label>
-              <input id="end" {...register("endYear", { required: true })} placeholder='YYYY' className='form-text' />
+              <input
+                id="end"
+                {...register('endYear', {required: true})}
+                placeholder="YYYY"
+                type="number"
+                className={cx('form-text', {invalid: errors.endYear})}
+              />
+              {errors.endYear && <p className="text-sm text-red-600">Please input a end year</p>}
             </div>
           </div>
           <input className="min-w-24 w-full form-button" type="submit" value="Submit" />
