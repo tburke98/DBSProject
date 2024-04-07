@@ -19,10 +19,10 @@ export default function Orders() {
   })
 
   const [columnDefs, _] = useState<ColDef[]>([
-    {field: '_id', headerName: 'Order ID'},
-    {field: 'supplier_id', headerName: 'Supplier ID'},
-    {field: 'order_date', headerName: 'Order Date'},
-    {field: 'parts_and_quantities', headerName: 'Part ID : Quantity'}
+    {field: '_id', headerName: 'Order ID', flex: 1},
+    {field: 'supplier_id', headerName: 'Supplier ID', flex: 1},
+    {field: 'order_date', headerName: 'Order Date', flex: 2},
+    {field: 'parts_and_quantities', headerName: 'Part ID : Quantity', flex: 2}
   ])
 
   if (loading || error) {
@@ -41,18 +41,20 @@ export default function Orders() {
   }
 
   return (
-    <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
-      <AgGridReact
-        rowData={data}
-        columnDefs={columnDefs}
-        gridOptions={gridOptions}
-        suppressRowClickSelection={true}
-        groupSelectsChildren={true}
-        rowSelection={'multiple'}
-        rowGroupPanelShow={'always'}
-        pivotPanelShow={'always'}
-        pagination={true}
-      />
+    <div className="flex w-full justify-center items-center">
+      <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
+        <AgGridReact
+          rowData={data}
+          columnDefs={columnDefs}
+          gridOptions={gridOptions}
+          suppressRowClickSelection={true}
+          groupSelectsChildren={true}
+          rowSelection={'multiple'}
+          rowGroupPanelShow={'always'}
+          pivotPanelShow={'always'}
+          pagination={true}
+        />
+      </div>
     </div>
   )
 }

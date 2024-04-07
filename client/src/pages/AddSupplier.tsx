@@ -57,29 +57,28 @@ export default function AddSuppliers() {
 
   return (
     <>
-      <div className="flex flex-col w-full gap-4">
-        <div className="flex flex-col justify-center gap-4 p-4">
+      <div className="flex flex-col w-full gap-4 justify-center items-center">
+        <div className="flex flex-col max-w-2xl form-card w-full mb-32">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name">Supplier Name: </label>
-              <input id="name" {...register('name', {required: true})} placeholder="" />
+            <div className="flex flex-col md:flex-row gap-4 w-full">
+              <div className="flex flex-col gap-2 flex-grow">
+                <label htmlFor="name">Supplier Name: </label>
+                <input id="name" {...register('name', {required: true})} placeholder="" className='form-text w-full'/>
+              </div>
+              <div className="flex flex-col gap-2 flex-grow">
+                <label htmlFor="email">Email: </label>
+                <input id="email" {...register('email', {required: true})} placeholder="someone@example.com" className='form-text w-full'/>
+              </div>
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="email">Email: </label>
-              <input id="email" {...register('email', {required: true})} placeholder="someone@example.com" />
+              <label htmlFor="phones">Phone Numbers: </label>
+              <input id="phones" {...register('phones', {required: true})} placeholder="x(xxx)xxx-xxxx, x(xxx)xxx-xxxx, ..." className='form-text'/>
             </div>
-            <div className="flex flex-col gap-2">
-              <label htmlFor="phones">Phone Numbers(comma separated): </label>
-              <input id="phones" {...register('phones', {required: true})} placeholder="x(xxx)xxx-xxxx" />
-            </div>
-            <button type="submit" value="Submit" className="form-button max-w-32">
+            <button type="submit" value="Submit" className="form-button w-full min-w-24">
               Submit
             </button>
-            <button type="reset" className="form-button max-w-32">
-              Reset
-            </button>
           </form>
-          {isSubmitted && !loading && !error && <div className="success-banner">Submitted successfully!</div>}
+          {isSubmitted && !loading && !error && <div className="success-banner">Submitted successfully!</div>} 
           {error && <div className="error-banner">Submission failed. Please try again.</div>}
         </div>
       </div>

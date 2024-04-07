@@ -14,7 +14,7 @@
 }
 
 .table-buttons {
-  @apply flex-1 bg-zinc-900 hover:bg-zinc-950 text-neutral-200 text-center rounded-lg text-2xl py-4 flex flex-col;
+  @apply flex-1 bg-zinc-900 hover:cursor-pointer hover:bg-zinc-950 text-neutral-200 text-center rounded-lg text-2xl py-4 flex flex-col;
 }
 
 .table-icons {
@@ -26,14 +26,22 @@
 }
 
 .success-banner {
-  @apply py-2 bg-green-600 text-neutral-200;
+  @apply p-2 bg-green-600 text-neutral-200 rounded-md;
 }
 
 .error-banner {
-  @apply py-2 bg-red-600 text-neutral-200;
+  @apply p-2 bg-red-600 text-neutral-200 rounded-md;
 }
 
 .form-button {
-  @apply bg-zinc-900 hover:bg-zinc-950 text-neutral-200 text-center rounded-md py-1 px-2;
+  @apply bg-zinc-900 hover:cursor-pointer hover:bg-zinc-950 text-neutral-200 text-center rounded-md py-1 px-2;
+}
+
+.form-text {
+  @apply rounded-md py-1 px-2 bg-[#353535];
+}
+
+.form-card {
+  @apply bg-[#202020] rounded-lg gap-4 p-4 justify-center;
 }
 

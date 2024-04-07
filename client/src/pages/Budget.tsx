@@ -29,33 +29,34 @@ function BudgetForm(props: BudgetFormProps) {
   } = useForm()
 
   return (
-    <form onSubmit={handleSubmit(data => setBudgetData(data))} noValidate>
-      <div className="flex flex-col w-full gap-4">
-        <div className="flex-col w-min">
-          <label htmlFor="years">Enter amount of years</label>
-          <input
-            type="number"
-            id="years"
-            min="0"
-            {...register('numYears', {required: true})}
-            className={cx('rounded p-1', {invalid: errors.numYears})}
-          />
-          {errors.numYears && <p className="text-sm text-red-600">Please input a number of year</p>}
+    <form className='flex w-full justify-center items-center' onSubmit={handleSubmit(data => setBudgetData(data))} noValidate>
+      <div className="form-card max-w-2xl flex flex-col w-full gap-4 mb-32">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col gap-2 flex-grow">
+            <label htmlFor="years">Enter amount of years</label>
+            <input
+              type="number"
+              id="years"
+              min="0"
+              {...register('numYears', {required: true})}
+              className={cx('form-text', {invalid: errors.numYears})}
+            />
+            {errors.numYears && <p className="text-sm text-red-600">Please input a number of year</p>}
+          </div>
+          <div className="flex flex-col gap-2 flex-grow">
+            <label htmlFor="years">Enter inflation rate</label>
+            <input
+              type="number"
+              id="rate"
+              min="0"
+              {...register('rate', {required: true})}
+              className={cx('form-text', {invalid: errors.rate})}
+            />
+            {errors.rate && <p className="text-sm text-red-600">Please input a rate</p>}
+          </div>
         </div>
-        <div className="flex-col w-min">
-          <label htmlFor="years">Enter inflation rate</label>
-          <input
-            type="number"
-            id="rate"
-            min="0"
-            {...register('rate', {required: true})}
-            className={cx('rounded p-1', {invalid: errors.rate})}
-          />
-          {errors.rate && <p className="text-sm text-red-600">Please input a rate</p>}
-        </div>
+        <input type="submit" value="Send" className="form-button" />
       </div>
-      {budgetData && <div className="text-sm text-green-800">Query successful</div>}
-      <input type="submit" value="Send" className="bg-slate-500 rounded cursor-pointer p-1 mt-4" />
     </form>
   )
 }
@@ -85,19 +86,21 @@ function BudgetDisplay({budgetData}: {budgetData: BudgetData}) {
   })
 
   const columnDefs: ColDef[] = [
-    {field: 'year', headerName: 'Year'},
-    {field: 'projection', headerName: 'Budget Projection'}
+    {field: 'year', headerName: 'Year', flex: 1},
+    {field: 'projection', headerName: 'Budget Projection', flex: 1}
   ]
 
   const gridOptions: GridOptions = {
     autoSizeStrategy: {
-      type: 'fitCellContents'
+      type: 'fitGridWidth'
     }
   }
 
   return (
-    <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
-      <AgGridReact rowData={rowData} columnDefs={columnDefs} gridOptions={gridOptions} />
+    <div className="flex w-full justify-center items-center">
+      <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
+        <AgGridReact rowData={rowData} columnDefs={columnDefs} gridOptions={gridOptions} />
+      </div>
     </div>
   )
 }
