@@ -80,7 +80,7 @@ def read_budget() -> list:
     return query(budget_query)[0]
 
 
-@app.route("/api/add_supplier/<name>/<email>/<phone_nums>", method="GET")
+@app.route("/api/add_supplier/<name>/<email>/<phone_nums>", methods=["GET"])
 def add_supplier(name: str, email: str, phone_nums: str) -> str:
     
     add_supplier_query = f"insert into suppliers (name, email) values ({name}, {email})"
