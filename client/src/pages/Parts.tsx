@@ -17,9 +17,9 @@ export default function Parts() {
   })
 
   const [columnDefs, _] = useState<ColDef[]>([
-    {field: '_id', headerName: 'Part ID'},
-    {field: 'price', headerName: 'Price'},
-    {field: 'description', headerName: 'Description'}
+    {field: '_id', headerName: 'Part ID', flex: 1},
+    {field: 'price', headerName: 'Price', flex: 1},
+    {field: 'description', headerName: 'Description', flex: 2}
   ])
 
   if (loading || error) {
@@ -38,18 +38,20 @@ export default function Parts() {
   }
 
   return (
-    <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
-      <AgGridReact
-        rowData={data}
-        columnDefs={columnDefs}
-        gridOptions={gridOptions}
-        suppressRowClickSelection={true}
-        groupSelectsChildren={true}
-        rowSelection={'multiple'}
-        rowGroupPanelShow={'always'}
-        pivotPanelShow={'always'}
-        pagination={true}
-      />
+    <div className="flex w-full justify-center items-center">
+      <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
+        <AgGridReact
+          rowData={data}
+          columnDefs={columnDefs}
+          gridOptions={gridOptions}
+          suppressRowClickSelection={true}
+          groupSelectsChildren={true}
+          rowSelection={'multiple'}
+          rowGroupPanelShow={'always'}
+          pivotPanelShow={'always'}
+          pagination={true}
+        />
+      </div>
     </div>
   )
 }

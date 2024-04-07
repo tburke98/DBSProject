@@ -86,19 +86,21 @@ function BudgetDisplay({budgetData}: {budgetData: BudgetData}) {
   })
 
   const columnDefs: ColDef[] = [
-    {field: 'year', headerName: 'Year'},
-    {field: 'projection', headerName: 'Budget Projection'}
+    {field: 'year', headerName: 'Year', flex: 1},
+    {field: 'projection', headerName: 'Budget Projection', flex: 1}
   ]
 
   const gridOptions: GridOptions = {
     autoSizeStrategy: {
-      type: 'fitCellContents'
+      type: 'fitGridWidth'
     }
   }
 
   return (
-    <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
-      <AgGridReact rowData={rowData} columnDefs={columnDefs} gridOptions={gridOptions} />
+    <div className="flex w-full justify-center items-center">
+      <div className="ag-theme-alpine-dark w-full" style={{height: 600}}>
+        <AgGridReact rowData={rowData} columnDefs={columnDefs} gridOptions={gridOptions} />
+      </div>
     </div>
   )
 }

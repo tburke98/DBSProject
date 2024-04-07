@@ -53,29 +53,29 @@ function Layout() {
             <House size={20} />
             <span> &nbsp;Home</span>
           </Link>
-          <Link to="/suppliers" className="flex items-center">
-            <Package size={20} />
-            <span> &nbsp;Suppliers</span>
-          </Link>
           <Link to="/orders" className="flex items-center">
             <Truck size={20} />
             <span> &nbsp;Orders</span>
           </Link>
-          <Link to="/expenses" className="flex items-center">
-            <PresentationChart size={20} />
-            <span> &nbsp;Expense Tracker</span>
+          <Link to="/suppliers" className="flex items-center">
+            <Package size={20} />
+            <span> &nbsp;Suppliers</span>
           </Link>
-          <Link to="/addsupplier" className="flex items-center">
-            <UserPlus size={20} />
-            <span> &nbsp;New Supplier</span>
+          <Link to="/parts" className="flex items-center">
+            <Engine size={20} />
+            <span> &nbsp;Parts</span>
           </Link>
           <Link to="/budget" className="flex items-center">
             <ChartLineUp size={20} />
             <span> &nbsp;Budget Projection</span>
           </Link>
-          <Link to="/parts" className="flex items-center">
-            <Engine size={20} />
-            <span> &nbsp;Parts</span>
+          <Link to="/addsupplier" className="flex items-center">
+            <UserPlus size={20} />
+            <span> &nbsp;New Supplier</span>
+          </Link>
+          <Link to="/expenses" className="flex items-center">
+            <PresentationChart size={20} />
+            <span> &nbsp;Expense Tracker</span>
           </Link>
         </div>
         <div className="flex bg-neutral-800 flex-grow justify-center">
@@ -114,12 +114,12 @@ function Home() {
                 </div>
                 <span>Suppliers</span>
               </Link>
-              <div className="table-buttons">
+              <Link to='/parts' className="table-buttons">
                 <div className="table-icons">
                   <Engine size={96} />
                 </div>
                 <span>Parts</span>
-              </div>
+              </Link>
             </div>
             <div className="flex flex-col md:flex-row w-full justify-between gap-4">
               <Link to='/budget' className="table-buttons">

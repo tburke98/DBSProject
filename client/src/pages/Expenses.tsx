@@ -37,12 +37,14 @@ export default function Expenses() {
       field: 'year',
       headerName: 'Year',
       sort: "asc",
+      flex: 1,
     },
     {
       field: 'total_expense',
       headerName: 'Total Expenses',
       editable: true,
       valueFormatter: numberFormatter,
+      flex: 1,
     },
   ])
 
