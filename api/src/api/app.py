@@ -80,31 +80,23 @@ def read_budget() -> list:
     return query(budget_query)[0]
 
 
-class Supplier(BaseModel):
-    name: str
-    email: str
-    phones: str
-
-
-@app.route("/api/add_supplier", methods=["POST"])
-def add_supplier() -> str:
-    try:
-        supplier_data = request.json
-        s = Supplier(**supplier_data)
-    except (ValidationError, ValueError) as e:
-        return ("Invalid POST data!", 400)
-    add_supplier_query = "insert into suppliers (name, email) values (%s, %s)"
-    insert(add_supplier_query, (s.name, s.email))
-    regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
-    phone_numbers = re.findall(regex, s.phones)
-    for num in phone_numbers:
-        phone_query = "insert into phone_numbers (phone_number, supplier_id) values (%s, %s)"
-        insert(phone_query, (num, s.id))
+@app.route("/api/add_supplier/<name>/<email>/<phone_nums>", method="GET")
+def add_supplier(name: str, email: str, phone_nums: str) -> str:
+    
+    add_supplier_query = f"insert into suppliers (name, email) values ({name}, {email})"
+    insert(add_supplier_query)
+    id = query("SELECT LAST_INSERT_ID() FROM suppliers")
+    regex = r"\d{1,3}-?\(?\d{3}\)?-?\d{3}-?\d{4}"  # xxx-(xxx)xxx-xxxx
+    phone_numbers = re.findall(regex, phone_nums)
+    
+    for phone_num in phone_numbers:
+        phone_query = f"insert into phone_numbers (phone_number, supplier_id) values ({phone_num}, {id})"
+        insert(phone_query)
     return "Supplier inserted."
 
 
 @app.route("/api/expenses/<start>/<end>")
-def read_expenses_all(start, end) -> list:
+def read_expenses_all(start: int, end: int) -> list:
     expenses_query = f"""
       SELECT DATE_FORMAT(o.order_date, '%Y') as year, sum(op.quantity * p.price) as total_expense
       FROM orders as o

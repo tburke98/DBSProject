@@ -45,7 +45,7 @@ function BudgetForm(props: BudgetFormProps) {
               {...register('numYears', {required: true})}
               className={cx('form-text', {invalid: errors.numYears})}
             />
-            {errors.numYears && <p className="text-sm text-red-600">Please input a number of year</p>}
+            {errors.numYears && <p className="text-sm text-red-600">Please input a number of years</p>}
           </div>
           <div className="flex flex-col gap-2 flex-grow">
             <label htmlFor="years">Enter inflation rate</label>
