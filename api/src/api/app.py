@@ -4,6 +4,7 @@ from os import environ as env
 from mysql.connector import connect as db_connect
 from pydantic import ValidationError, BaseModel
 import re
+import pymysql
 
 from datetime import date
 from typing import List, Tuple, Any
@@ -56,17 +57,6 @@ def read_suppliers() -> list:
     return query(supplier_query)
 
 
-@app.route("/api/suppliers/<_id>")
-def read_supplier(_id: int) -> list:
-    supplier_query = f"""
-      select s._id, s.name, s.email, group_concat(distinct p.phone_number separator ', ') as phones from suppliers as s
-      join phone_numbers as p ON s._id = p.
-      where s._id = {_id}
-      group by s._id
-    """
-    return query(supplier_query, (_id,))
-
-
 @app.route("/api/budget")
 def read_budget() -> list:
     year = date.today().year - 1
@@ -89,17 +79,23 @@ class Supplier(BaseModel):
 @app.route("/api/add_supplier", methods=["POST"])
 def add_supplier() -> str:
     try:
-        supplier_data = request.json
+        supplier_data = req.json
         s = Supplier(**supplier_data)
     except (ValidationError, ValueError) as e:
         return ("Invalid POST data!", 400)
     add_supplier_query = "insert into suppliers (name, email) values (%s, %s)"
     insert(add_supplier_query, (s.name, s.email))
+
+    supplier_id = query("select LAST_INSERT_ID() as id from suppliers")
+    print(supplier_id[0]["id"])
+
     regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
     phone_numbers = re.findall(regex, s.phones)
     for num in phone_numbers:
-        phone_query = "insert into phone_numbers (phone_number, supplier_id) values (%s, %s)"
-        insert(phone_query, (num, s.id))
+        phone_query = (
+            "insert into phone_numbers (supplier_id, phone_number) values (%s, %s)"
+        )
+        insert(phone_query, (supplier_id[0]["id"], num))
     return "Supplier inserted."
 
 
