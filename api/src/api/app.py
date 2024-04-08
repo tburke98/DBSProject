@@ -87,14 +87,11 @@ def add_supplier() -> str:
     insert(add_supplier_query, (s.name, s.email))
 
     supplier_id = query("select LAST_INSERT_ID() as id from suppliers")
-    print(supplier_id[0]["id"])
 
-    regex = r"\d{1,3}-\(\d{3}\)\d{3}-\d{4}"  # xxx-(xxx)xxx-xxxx
+    regex = r"\d{1,3}-?\(\d{3}\)-?\d{3}-?\d{4}"  # xxx-(xxx)xxx-xxxx
     phone_numbers = re.findall(regex, s.phones)
     for num in phone_numbers:
-        phone_query = (
-            "insert into phone_numbers (supplier_id, phone_number) values (%s, %s)"
-        )
+        phone_query = "insert into phone_numbers (supplier_id, phone_number) values (%s, %s)"
         insert(phone_query, (supplier_id[0]["id"], num))
     return "Supplier inserted."
 
