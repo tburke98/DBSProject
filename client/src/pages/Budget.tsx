@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {useForm, SubmitHandler} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import cx from 'classnames'
 import useAxios from 'axios-hooks'
 import {AgGridReact} from '@ag-grid-community/react'
@@ -13,15 +13,10 @@ interface BudgetData {
 export default function Budget() {
   const [budgetData, setBudgetData] = useState<BudgetData | null>(null)
 
-  return budgetData ? <BudgetDisplay budgetData={budgetData} /> : <BudgetForm state={[budgetData, setBudgetData]} />
+  return budgetData ? <BudgetDisplay budgetData={budgetData} /> : <BudgetForm callback={setBudgetData} />
 }
 
-interface BudgetFormProps {
-  state: [BudgetData | null, Function]
-}
-
-function BudgetForm(props: BudgetFormProps) {
-  const [budgetData, setBudgetData] = props.state
+function BudgetForm({callback}: {callback: Function}) {
   const {
     register,
     handleSubmit,
@@ -31,7 +26,7 @@ function BudgetForm(props: BudgetFormProps) {
   return (
     <form
       className="flex w-full justify-center items-center"
-      onSubmit={handleSubmit(data => setBudgetData(data))}
+      onSubmit={handleSubmit(data => callback(data))}
       noValidate
     >
       <div className="form-card max-w-2xl flex flex-col w-full gap-4 mb-32">

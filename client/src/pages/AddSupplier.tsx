@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {useForm} from 'react-hook-form'
-import useAxios from 'axios-hooks'
+import axios from 'axios'
 
 export default function AddSuppliers() {
   interface Supplier {
@@ -12,47 +12,20 @@ export default function AddSuppliers() {
 
   const {
     register,
-    handleSubmit,
-    formState: {errors}
+    handleSubmit
   } = useForm<Supplier>()
 
-  const [formData, setFormData] = useState<Supplier>({
-    _id: 0,
-    name: '',
-    email: '',
-    phones: ''
-  })
-
-  const [{data, loading, error}, execute] = useAxios<Supplier[], any, any>(
-    {
-      url: `add_supplier`,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    },
-    {manual: true}
-  )
-
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
 
   const onSubmit = async (formData: Supplier) => {
     try {
-      console.log(formData)
-      await execute({
-        data: formData
-      })
+      await axios.post("add_supplier", formData)
       setIsSubmitted(true)
-    } catch (error) {
-      setIsSubmitted(false)
-    }
-  }
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
-  if (error) {
-    return <pre>{JSON.stringify(error, null, 2)}</pre>
+      setError(false)
+    } catch {
+      setError(true)
+    } 
   }
 
   return (
@@ -78,7 +51,7 @@ export default function AddSuppliers() {
               Submit
             </button>
           </form>
-          {isSubmitted && !loading && !error && <div className="success-banner">Submitted successfully!</div>} 
+          {isSubmitted && <div className="success-banner">Submitted successfully!</div>} 
           {error && <div className="error-banner">Submission failed. Please try again.</div>}
         </div>
       </div>

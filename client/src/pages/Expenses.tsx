@@ -1,7 +1,7 @@
 import useAxios from 'axios-hooks'
 import {AgGridReact} from '@ag-grid-community/react'
 import {useState} from 'react'
-import {useForm, SubmitHandler} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import cx from 'classnames'
 import type {ColDef, GridOptions} from '@ag-grid-community/core'
 
@@ -15,18 +15,13 @@ interface Expense {
   total_expense: number
 }
 
-interface ExpenseFormProps {
-  state: [ExpenseData | null, Function]
-}
-
 export default function Expense() {
   const [expenseData, setExpenseData] = useState<ExpenseData | null>(null)
 
-  return expenseData ? <ExpenseDisplay expenseData={expenseData} /> : <ExpenseForm state={[expenseData, setExpenseData]}/>
+  return expenseData ? <ExpenseDisplay expenseData={expenseData} /> : <ExpenseForm callback={setExpenseData}/>
 }
 
-function ExpenseForm(props: ExpenseFormProps) {
-  const [expenseData, setExpenseData] = props.state
+function ExpenseForm({callback}: {callback: Function}) {
   const {
     register,
     handleSubmit,
@@ -37,7 +32,7 @@ function ExpenseForm(props: ExpenseFormProps) {
     <>
       <form
         className="flex w-full justify-center items-center"
-        onSubmit={handleSubmit(formdata => setExpenseData(formdata))} 
+        onSubmit={handleSubmit(formdata => callback(formdata))} 
         noValidate
       >
         <div className="form-card max-w-xl flex flex-col w-full gap-4 mb-32">
