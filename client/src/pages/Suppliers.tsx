@@ -1,7 +1,7 @@
 import useAxios from 'axios-hooks'
 import {AgGridReact} from '@ag-grid-community/react'
-import {useState} from 'react'
-
+import {useEffect, useState} from 'react'
+import { useLocation } from 'react-router-dom'
 import type {ColDef, GridOptions} from '@ag-grid-community/core'
 
 interface Supplier {
@@ -12,9 +12,10 @@ interface Supplier {
 }
 
 export default function Suppliers() {
+
   const [{data, loading, error}] = useAxios<Supplier[], any, any>({
     url: 'suppliers',
-    method: 'GET'
+    method: 'GET',
   })
 
   const [columnDefs, _] = useState<ColDef[]>([

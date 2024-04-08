@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 
 import {Outlet, RouterProvider, createBrowserRouter, Link} from 'react-router-dom'
 import {configure} from 'axios-hooks'
-import Axios from 'axios'
+import axios from 'axios'
 import {ModuleRegistry} from '@ag-grid-community/core'
 import {ClientSideRowModelModule} from '@ag-grid-community/client-side-row-model'
 import {House, Package, Engine, Truck, UserPlus, ChartLineUp, PresentationChart} from '@phosphor-icons/react'
@@ -19,10 +19,12 @@ import Budget from './pages/Budget'
 import AddSuppliers from './pages/AddSupplier'
 import Parts from './pages/Parts'
 
-const axios = Axios.create({
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
+
+const axiosClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL
 })
-configure({axios})
+configure({axios: axiosClient})
 
 ModuleRegistry.registerModules([ClientSideRowModelModule])
 
