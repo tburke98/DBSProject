@@ -5,6 +5,7 @@ from mysql.connector import connect as db_connect
 from pydantic import ValidationError, BaseModel
 import re
 
+
 from datetime import date
 from typing import List, Tuple, Any
 
@@ -50,7 +51,7 @@ def read_orders_all() -> list:
 def read_suppliers() -> list:
     supplier_query = """
       select s._id, s.name, s.email, group_concat(distinct p.phone_number separator ', ') as phones from suppliers as s
-      join phone_numbers as p ON s._id = p.supplier_id
+      left join phone_numbers as p ON s._id = p.supplier_id
       group by s._id
     """
     return query(supplier_query)
