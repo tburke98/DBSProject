@@ -4,7 +4,6 @@ from os import environ as env
 from mysql.connector import connect as db_connect
 from pydantic import ValidationError, BaseModel
 import re
-import pymysql
 
 from datetime import date
 from typing import List, Tuple, Any
